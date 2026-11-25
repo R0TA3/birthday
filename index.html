@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ജന്മദിനാശംസകൾ ❤️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;600;800&family=Baloo+Chettan+2:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#150b1f; --ember:#ff7a1a; --flame:#ffb300; --paper:#fbfcff; --rule:#b9cdea; --margin:#e58a8a; --ink:#1f2a44;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(ellipse at 50% 120%,#5a1d0c 0%,#2a0f22 45%,var(--night) 80%);color:var(--ink);font-family:'Anek Malayalam','Noto Sans Malayalam','Manjari',sans-serif;overflow:hidden}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.screen{position:fixed;inset:0;z-index:2;display:none}
+.screen.on{display:flex}
+
+/* ---------- lock ---------- */
+#lock{align-items:center;justify-content:center;padding:20px}
+.lockcard{width:min(420px,100%);background:var(--paper);border-radius:6px;padding:34px 28px 28px 54px;position:relative;box-shadow:0 0 60px rgba(255,120,20,.35);
+  background-image:linear-gradient(transparent 39px,var(--rule) 40px);background-size:100% 40px}
+.lockcard::before{content:"";position:absolute;left:38px;top:0;bottom:0;width:2px;background:var(--margin)}
+.lockcard h1{font-family:'Baloo Chettan 2','Anek Malayalam',sans-serif;font-weight:800;font-size:28px;line-height:40px;margin:0 0 40px;color:#c4410c}
+.lockcard p{margin:0;line-height:40px;font-size:17px}
+#dob{width:100%;font:700 26px/40px 'Anek Malayalam',monospace;letter-spacing:.14em;border:0;border-bottom:3px solid var(--ember);background:transparent;color:var(--ink);outline:none;padding:0;text-align:center}
+#dob:focus-visible{border-bottom-color:#e22}
+#unlock{margin-top:40px;width:100%;height:46px;border:0;border-radius:23px;background:linear-gradient(90deg,#ff4d00,var(--flame));color:#fff;font:800 18px 'Anek Malayalam',sans-serif;cursor:pointer}
+#unlock:focus-visible,.nav button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+#err{min-height:40px;color:#c1121f;font-weight:600;line-height:40px;font-size:15px}
+.shake{animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
+
+/* ---------- book ---------- */
+#book{flex-direction:column;align-items:center;padding:14px 12px 10px}
+.sheet{flex:1;min-height:0;width:min(760px,100%);background:var(--paper);border-radius:6px;position:relative;box-shadow:0 0 70px rgba(255,110,20,.35);overflow:hidden;display:flex}
+.sheet::before{content:"";position:absolute;left:44px;top:0;bottom:0;width:2px;background:var(--margin);z-index:2}
+.scroll{flex:1;overflow-y:auto;padding:0 22px 40px 62px;
+  background-image:linear-gradient(transparent 35px,var(--rule) 36px);background-size:100% 36px;background-attachment:local;scroll-behavior:smooth}
+.scroll h2{font-family:'Baloo Chettan 2','Anek Malayalam',sans-serif;font-weight:800;font-size:clamp(22px,4.6vw,32px);line-height:72px;margin:0;color:#b83a0a}
+.scroll p{margin:0;font-size:clamp(16px,2.5vw,19px);line-height:36px;text-align:left}
+.scroll p.gap{margin-top:36px}
+.scroll p.b{font-weight:800;color:#9d2b05}
+.w{display:inline-block;white-space:nowrap}
+.l{display:inline-block;opacity:0;animation:fire 1.3s ease-out forwards}
+.done .l{animation:none;opacity:1}
+@keyframes fire{
+  0%{opacity:0;transform:translateY(14px) scale(.5);color:#fff;text-shadow:0 0 6px #ff0,0 0 14px #f80,0 -6px 18px #f30;filter:blur(3px)}
+  35%{opacity:1;transform:translateY(-4px) scale(1.3);color:#ff9d00;text-shadow:0 0 8px #ff6a00,0 -5px 14px #e22}
+  100%{opacity:1;transform:none;color:inherit;text-shadow:none;filter:none}
+}
+.bday{font-family:'Baloo Chettan 2',sans-serif;font-weight:800;font-size:clamp(34px,9vw,62px);line-height:1.25;text-align:center;margin:36px 0 0;color:#d63a00}
+.photo{margin:20px auto 0;width:min(300px,78%);opacity:0;transform:scale(.8) rotate(-3deg);transition:all 1.2s cubic-bezier(.2,1.4,.4,1)}
+.photo.show{opacity:1;transform:rotate(-2deg)}
+.photo .frame{background:#fff;padding:10px 10px 34px;box-shadow:0 8px 28px rgba(0,0,0,.35),0 0 40px rgba(255,140,0,.55);border-radius:3px;position:relative}
+.photo img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:#ffe3c4}
+.photo .frame::after{content:"❤️";position:absolute;bottom:4px;right:12px;font-size:20px}
+.ph-missing{aspect-ratio:4/5;background:#ffe3c4;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;font-size:14px;color:#7a3b00}
+.nav{width:min(760px,100%);display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 2px 2px}
+.nav button{border:0;border-radius:22px;height:42px;padding:0 20px;font:800 16px 'Anek Malayalam',sans-serif;cursor:pointer;color:#fff;background:linear-gradient(90deg,#ff4d00,var(--flame))}
+.nav button[disabled]{opacity:.3;cursor:default}
+.nav .skip{background:transparent;border:2px solid #ffb87a;color:#ffd9b0;padding:0 14px}
+.dots{display:flex;gap:9px}
+.dots i{width:11px;height:11px;border-radius:50%;background:#6b3b2b}
+.dots i.on{background:var(--flame);box-shadow:0 0 12px var(--ember)}
+.fadeout{opacity:0;transition:opacity .35s}
+.scroll{transition:opacity .35s}
+@media (prefers-reduced-motion:reduce){.l{animation:none;opacity:1}.photo{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+
+<!-- Entry page -->
+<section class="screen on" id="lock">
+  <div class="lockcard" id="card">
+    <h1>ഒരു ചെറിയ സർപ്രൈസ് 🔥</h1>
+    <p>തുറക്കാൻ നിന്റെ ജനനത്തീയതി നൽകൂ</p>
+    <input id="dob" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="DD-MM-YYYY" aria-label="Date of birth DD-MM-YYYY">
+    <div id="err" role="alert"></div>
+    <button id="unlock">തുറക്കൂ</button>
+  </div>
+</section>
+
+<!-- 4 pages -->
+<section class="screen" id="book">
+  <div class="sheet"><div class="scroll" id="scroll"><div id="text"></div></div></div>
+  <div class="nav">
+    <button id="prev">‹ മുമ്പത്തേത്</button>
+    <div class="dots" id="dots"></div>
+    <button class="skip" id="skip">ഒഴിവാക്കൂ</button>
+    <button id="next">അടുത്തത് ›</button>
+  </div>
+</section>
+
+<script>
+/* ======= SETTINGS (change here) ======= */
+const VALID_DOB = ["25-11-2004"];     // accepted passwords, DD-MM-YYYY
+const PHOTO = "photo.jpg";            // put her photo in the same folder with this name
+
+/* ======= WISHES (a paragraph starting with ** is shown bold) ======= */
+const PAGES = [
+{ title:`നവംബർ 25 — കാലം കുറിച്ചുവെച്ചൊരു മനോഹര ദിനം...`, paras:[
+`ചില ദിവസങ്ങൾ അങ്ങനെയാണ്... കലണ്ടറിലെ വെറുമൊരു അക്കമായി കടന്നുപോകാൻ അവയ്ക്ക് കഴിയില്ല. ചില ദിവസങ്ങൾക്ക് കാലം പോലും അറിയാതെ ഒരു പ്രത്യേക ഭംഗിയുണ്ടാകും. അങ്ങനെയൊരു ദിവസമാണ് നവംബർ 25. ലോകത്തിന്റെ തിരക്കുകൾക്കിടയിൽ മറ്റൊരു സാധാരണ ദിവസം മാത്രമായിരിക്കാം അത്. പക്ഷേ, ഈ ഭൂമിയിൽ എവിടെയോ ഒരു മനോഹരമായ ആത്മാവ് ജനിച്ചുവീണ ദിവസമാണത്.`,
+`കാലം ഒരുപാട് മുന്നോട്ടുപോയി. ഋതുക്കൾ മാറി, മഴകൾ പെയ്തു, വസന്തങ്ങൾ പൂത്തുലഞ്ഞു, മഞ്ഞുകാലങ്ങൾ വന്നുപോയി. ഓരോ വർഷവും നവംബർ 25 വീണ്ടും വന്നെത്തുമ്പോൾ, പ്രകൃതിക്ക് പോലും പറയാൻ ഒരു കഥയുണ്ടാകും. കാരണം, ഒരിക്കൽ ഈ ദിവസമാണ് ഭൂമിയിലേക്ക് ഒരു പുതിയ ജീവിതം കടന്നുവന്നത്.`,
+`നിനക്കറിയാമോ? ഈ ലോകത്ത് എല്ലാവരും ഒരുപോലെയല്ല. ചിലർ നമ്മുടെ ജീവിതത്തിലൂടെ കടന്നുപോകുന്നത് ഒരു കാറ്റുപോലെയാണ്. വന്നുപോകുമ്പോൾ ഒന്നും ബാക്കിവെക്കില്ല. എന്നാൽ മറ്റു ചിലർ അങ്ങനെയല്ല. അവർ ഒരു ഓർമ്മയായി മാറുന്നു. ഒരു മനോഹരമായ വരിയായി മാറുന്നു. ചിലപ്പോൾ നമ്മൾ അറിയാതെ തന്നെ നമ്മുടെ ചിന്തകളുടെ ഒരു ഭാഗമായിത്തീരുന്നു.`,
+`ജീവിതം എന്ന വലിയ പുസ്തകത്തിൽ ഓരോ മനുഷ്യനും ഓരോ അധ്യായമാണ്. ചില അധ്യായങ്ങൾ ചെറുതായിരിക്കും, ചിലത് വേദനകൾ നിറഞ്ഞതായിരിക്കും, മറ്റു ചിലത് ചിരിയും സന്തോഷവും നിറഞ്ഞതായിരിക്കും. എന്നാൽ നിന്റെ ജീവിതമെന്ന പുസ്തകത്തിലെ ഓരോ അധ്യായവും മനോഹരമായിരിക്കട്ടെ എന്നാണ് ഇന്നത്തെ എന്റെ ആഗ്രഹം.`,
+`നവംബർ 25... നിന്റെ ജന്മദിനം.`,
+`ഈ ദിവസം നിനക്കൊരു പുതിയ വയസ്സ് മാത്രമല്ല സമ്മാനിക്കേണ്ടത്. പുതിയ സ്വപ്നങ്ങളും പുതിയ പ്രതീക്ഷകളും പുതിയ സന്തോഷങ്ങളും സമ്മാനിക്കട്ടെ. കഴിഞ്ഞുപോയ ദിവസങ്ങളിലെ സങ്കടങ്ങൾ ഇന്നലെകളുടെ ഓർമ്മകളായി മാത്രം അവശേഷിക്കട്ടെ. വരാനിരിക്കുന്ന ഓരോ പ്രഭാതവും നിനക്കായി പുതിയൊരു വെളിച്ചം കൊണ്ടുവരട്ടെ.`,
+`ഒരു പൂവ് വിരിയുമ്പോൾ അതിനറിയില്ല അതിന്റെ സൗന്ദര്യം എത്രപേരുടെ മനസ്സിൽ സന്തോഷം നിറയ്ക്കുമെന്ന്. അതുപോലെ, ഒരുപക്ഷേ നിനക്കും അറിയില്ലായിരിക്കാം നിന്റെ സാന്നിധ്യം ഈ ലോകത്തിന് എത്രത്തോളം മനോഹരമായിരിക്കാമെന്ന്.`,
+`**ജന്മദിനാശംസകൾ... ഈ ലോകത്തിന്റെ മനോഹാരിതയിൽ നിന്റേതായൊരു നിറം കൂടി ചേർത്തതിന്.`
+]},
+{ title:`നിന്റെ ജീവിതം ഒരു കവിതയായിരിക്കട്ടെ...`, paras:[
+`ജീവിതം ഒരിക്കലും ഒരേ താളത്തിൽ ഒഴുകുന്ന ഒരു പുഴയല്ല. ചിലപ്പോൾ അത് ശാന്തമായി ഒഴുകും. മറ്റു ചിലപ്പോൾ കല്ലുകളോട് മുട്ടിയും വഴികൾ മാറിയും മുന്നോട്ടുപോകും. ചില യാത്രകളിൽ പൂക്കൾ കാണാം, മറ്റു ചില യാത്രകളിൽ മുള്ളുകളും. എന്നാൽ അതൊന്നും യാത്രയുടെ സൗന്ദര്യം ഇല്ലാതാക്കുന്നില്ല.`,
+`നിന്റെ ജീവിതയാത്രയും അങ്ങനെയായിരിക്കാം. ചിരിച്ച ദിവസങ്ങൾക്കൊപ്പം ആരും കാണാതെ കണ്ണുനീർ പൊഴിച്ച രാത്രികളും ഉണ്ടായിട്ടുണ്ടാകാം. എല്ലാവരുടെയും മുന്നിൽ സന്തോഷത്തോടെ നിന്നിട്ടും ഉള്ളിൽ ഒരുപാട് ചിന്തകൾ ഒളിപ്പിച്ച നിമിഷങ്ങളുണ്ടായിരിക്കാം. ചില ആഗ്രഹങ്ങൾ പൂവണിഞ്ഞിട്ടുണ്ടാകാം, ചിലത് ഇന്നും മനസ്സിന്റെ ഏതോ കോണിൽ ഒരു സ്വപ്നമായി ഉറങ്ങുന്നുണ്ടാകാം.`,
+`പക്ഷേ, ഒരു കാര്യം ഓർക്കണം...`,
+`നീ പിന്നിട്ട വഴികൾ എത്ര ദുഷ്കരമായിരുന്നാലും, നീ ഇന്നിവിടെ എത്തിനിൽക്കുന്നു എന്നത് തന്നെ വലിയൊരു വിജയമാണ്. നിന്റെ കണ്ണുകളിലെ സ്വപ്നങ്ങൾക്ക് ഇനിയും ഒരുപാട് ദൂരം സഞ്ചരിക്കാനുണ്ട്. നിന്റെ ചിരിക്ക് ഇനിയും ഒരുപാട് പ്രഭാതങ്ങളെ മനോഹരമാക്കാനുണ്ട്.`,
+`ജീവിതത്തിൽ ഒരിക്കലും മറ്റൊരാളുടെ പൂന്തോട്ടവുമായി നിന്റെ പൂക്കളെ താരതമ്യം ചെയ്യരുത്. ഓരോ പൂവും വിരിയുന്നത് അതിന്റേതായ സമയത്താണ്. ചില പൂക്കൾ വസന്തത്തിൽ വിരിയുമ്പോൾ മറ്റു ചിലത് മഴക്കാലത്താണ് വിരിയുന്നത്. അതുപോലെ നിന്റെ സ്വപ്നങ്ങളും അവയുടെ ശരിയായ സമയത്ത് പൂവണിയും.`,
+`നിനക്ക് ഒരുപാട് സന്തോഷങ്ങൾ ലഭിക്കട്ടെ. നീ ആഗ്രഹിക്കുന്ന കാര്യങ്ങൾ നിന്റെ കൈകളിലേക്ക് എത്തിച്ചേരട്ടെ. നിന്റെ അധ്വാനത്തിന് അർഹമായ അംഗീകാരം ലഭിക്കട്ടെ. നിന്റെ മനസ്സിന് സമാധാനം നൽകുന്ന മനുഷ്യരും, നിന്റെ വളർച്ചയിൽ സന്തോഷിക്കുന്ന സുഹൃത്തുക്കളും, നിന്റെ വിജയങ്ങളിൽ അഭിമാനിക്കുന്നവരും നിനക്കുചുറ്റും ഉണ്ടാകട്ടെ.`,
+`നിനക്ക് കരയേണ്ടിവരുന്ന ദിവസങ്ങൾ വന്നാൽ, ആ കണ്ണുനീർ നിന്റെ ദൗർബല്യത്തിന്റെ അടയാളമാകാതിരിക്കട്ടെ. പകരം, അതിനുശേഷം കൂടുതൽ ശക്തിയായി മുന്നോട്ടുപോകാനുള്ള ധൈര്യമായി മാറട്ടെ.`,
+`നിന്റെ ചിരി ഒരിക്കലും സാഹചര്യങ്ങളുടെ തടവുകാരിയാകരുത്. നിന്റെ സന്തോഷം മറ്റൊരാളുടെ അംഗീകാരത്തെ ആശ്രയിച്ചാകരുത്. നിനക്കായി നീയും ജീവിക്കണം. നിന്റെ സ്വപ്നങ്ങൾക്കായി നീയും പോരാടണം. നിന്റെ മനസ്സിന് ഇഷ്ടമുള്ള വഴികളിലൂടെ നീയും സഞ്ചരിക്കണം.`,
+`കാരണം, ഈ ജീവിതം നിനക്കുള്ളതാണ്.`,
+`**നീ വിരിയേണ്ടത് മറ്റുള്ളവരുടെ പ്രതീക്ഷകൾക്കുവേണ്ടിയല്ല; നിന്റെ ഉള്ളിലെ സ്വപ്നങ്ങളുടെ വെളിച്ചത്തിലാണ്.`
+]},
+{ title:`ചില മനുഷ്യർക്ക് പകരംവയ്ക്കാൻ മറ്റൊന്നുമില്ല...`, paras:[
+`ഈ വലിയ ലോകത്ത് കോടിക്കണക്കിന് മനുഷ്യരുണ്ട്. ഓരോരുത്തർക്കും അവരുടേതായ കഥകളുണ്ട്, സ്വപ്നങ്ങളുണ്ട്, പ്രതീക്ഷകളുണ്ട്. പക്ഷേ, എല്ലാവരെയും ഒരുപോലെ ഓർക്കാൻ നമുക്ക് കഴിയാറില്ല. ചില മുഖങ്ങൾ കാലം മായ്ച്ചുകളയും. ചില ശബ്ദങ്ങൾ ഓർമ്മകളിൽനിന്ന് പതിയെ അകന്നുപോകും. എന്നാൽ ചില മനുഷ്യർ അങ്ങനെയല്ല.`,
+`അവർ നമ്മുടെ ഓർമ്മകളിൽ ഒരു പ്രത്യേക ഇടം കണ്ടെത്തും.`,
+`ഒരു പാട്ട് കേൾക്കുമ്പോൾ ഓർമ്മ വരുന്ന ചില മുഖങ്ങൾ... മഴ പെയ്യുമ്പോൾ മനസ്സിൽ തെളിയുന്ന ചില നിമിഷങ്ങൾ... ഒരു പ്രത്യേക ദിവസം വരുമ്പോൾ അറിയാതെ ഓർത്തുപോകുന്ന ചില മനുഷ്യർ... അങ്ങനെയാണ് ചില സാന്നിധ്യങ്ങൾ.`,
+`ഒരു മനുഷ്യന്റെ സൗന്ദര്യം അയാളുടെ മുഖത്തോ വസ്ത്രധാരണത്തിലോ മാത്രമല്ല. മറ്റുള്ളവരോട് സംസാരിക്കുന്ന രീതിയിലും, ചെറിയ കാര്യങ്ങളിൽ കണ്ടെത്തുന്ന സന്തോഷത്തിലും, ആരെയും വേദനിപ്പിക്കാതിരിക്കാനുള്ള മനസ്സിലും, വീണുപോയിട്ടും വീണ്ടും എഴുന്നേൽക്കാനുള്ള ധൈര്യത്തിലുമാണ് യഥാർത്ഥ സൗന്ദര്യം ഒളിഞ്ഞിരിക്കുന്നത്.`,
+`നിന്റെ ജീവിതത്തിലും അത്തരത്തിലുള്ള സൗന്ദര്യം എന്നും നിലനിൽക്കട്ടെ.`,
+`നിന്റെ ഹൃദയത്തിലെ നന്മ ഒരിക്കലും നഷ്ടപ്പെടാതിരിക്കട്ടെ. ലോകം ചിലപ്പോൾ നിനക്കുനേരെ കഠിനമായി പെരുമാറിയേക്കാം. ചിലർ നിന്റെ നന്മയെ മനസ്സിലാക്കാതെ പോയേക്കാം. ചിലർ നിന്റെ നിശബ്ദതയെ തെറ്റിദ്ധരിച്ചേക്കാം. എങ്കിലും നിന്റെ മനസ്സിലെ നന്മയെ കൈവിടരുത്.`,
+`എന്നാൽ അതിനുവേണ്ടി ഒരിക്കലും നിന്നെത്തന്നെ മറന്നുകളയുകയും അരുത്. നിനക്ക് വേദന നൽകുന്ന ഇടങ്ങളിൽനിന്ന് മാറിനിൽക്കാനും, നിന്റെ മനസ്സിന് സമാധാനം നൽകുന്ന കാര്യങ്ങളെ ചേർത്തുപിടിക്കാനും പഠിക്കണം.`,
+`ഒരുപക്ഷേ, നിനക്ക് മുന്നിലുള്ള വർഷം നിന്റെ ജീവിതത്തിലെ ഏറ്റവും മനോഹരമായ വർഷമായിരിക്കാം. നീ ഒരിക്കലും പ്രതീക്ഷിക്കാത്ത ചില സന്തോഷങ്ങൾ നിന്നെ തേടിയെത്തിയേക്കാം. ഒരുപാട് നാളായി മനസ്സിൽ സൂക്ഷിച്ച ആഗ്രഹങ്ങൾ യാഥാർഥ്യമായേക്കാം. നിന്റെ ജീവിതത്തിന് പുതിയൊരു അർത്ഥം നൽകുന്ന അനുഭവങ്ങൾ നിന്നെ കാത്തിരിക്കുന്നുണ്ടാകാം.`,
+`അതുകൊണ്ട്, ഇന്നത്തെ ഈ ജന്മദിനത്തിൽ നിനക്കായി ഒരു ചെറിയ ആഗ്രഹം കൂടി...`,
+`നീ ഒരിക്കലും നിന്റെ മൂല്യം മറക്കരുത്. നിന്റെ കണ്ണുകളിലെ തിളക്കം നഷ്ടപ്പെടുത്തരുത്. നിന്റെ ചിരിയുടെ ഭംഗി കുറയ്ക്കരുത്. മറ്റുള്ളവരുടെ ജീവിതത്തിൽ വെളിച്ചമാകാൻ ശ്രമിക്കുന്നതിനൊപ്പം നിന്റെ ജീവിതത്തിലും വെളിച്ചം നിറയ്ക്കാൻ മറക്കരുത്.`,
+`കാരണം, ചില മനുഷ്യർ ഈ ലോകത്ത് ജനിക്കുന്നത് തന്നെ ചുറ്റുമുള്ള ജീവിതങ്ങളെ കുറച്ചുകൂടി മനോഹരമാക്കാനാണെന്ന് തോന്നിപ്പോകും.`,
+`**നിന്റെ ജീവിതം അങ്ങനെയൊരു മനോഹരമായ കഥയായിരിക്കട്ടെ.`
+]},
+{ title:`ഒരു പിറന്നാളിനപ്പുറം... നിനക്കായി ഒരു പ്രാർത്ഥന`, final:true, paras:[
+`ഇപ്പോൾ സമയം വീണ്ടും ഒരു പുതിയ വർഷത്തിന്റെ വാതിൽക്കൽ എത്തിനിൽക്കുകയാണ്. ഇന്നലെകളുടെ ഓർമ്മകൾ പതിയെ പിന്നിലേക്ക് മാറുന്നു. ഇന്നത്തെ ദിവസം നിന്റെ പേരിൽ എഴുതപ്പെടുന്നു. നാളെയുടെ പ്രതീക്ഷകൾ നിന്റെ മുന്നിൽ പുതിയ വഴികൾ തുറക്കുന്നു.`,
+`ഈ ജന്മദിനത്തിൽ നിനക്ക് വിലകൂടിയ സമ്മാനങ്ങളേക്കാൾ വിലപ്പെട്ട ചില കാര്യങ്ങൾ ലഭിക്കട്ടെ എന്ന് ഞാൻ ആഗ്രഹിക്കുന്നു.`,
+`ഉറങ്ങാൻ കിടക്കുമ്പോൾ മനസ്സിൽ സമാധാനമുണ്ടാകട്ടെ. രാവിലെ ഉണരുമ്പോൾ ജീവിക്കാൻ പുതിയൊരു പ്രതീക്ഷയുണ്ടാകട്ടെ. നിന്റെ മുഖത്ത് ചിരി വിടരാൻ കാരണമാകുന്ന ചെറിയ ചെറിയ സന്തോഷങ്ങൾ ദിവസവും നിന്നെ തേടിയെത്തട്ടെ.`,
+`നിന്റെ കുടുംബത്തിൽ സന്തോഷവും ആരോഗ്യവും നിറയട്ടെ. നിന്റെ സ്വപ്നങ്ങൾക്ക് ചിറകുകൾ മുളയ്ക്കട്ടെ. നിന്റെ യാത്രകളിൽ നല്ല മനുഷ്യരെ കണ്ടുമുട്ടട്ടെ. നിന്റെ ജീവിതത്തിൽ നീ അർഹിക്കുന്ന സ്നേഹവും ബഹുമാനവും സന്തോഷവും നിറഞ്ഞുനിൽക്കട്ടെ.`,
+`നിനക്ക് ഇഷ്ടമുള്ള സ്ഥലങ്ങളിലേക്ക് യാത്ര ചെയ്യാൻ കഴിയട്ടെ. കാണാൻ ആഗ്രഹിച്ച കാഴ്ചകൾ കാണാൻ കഴിയട്ടെ. പറയാൻ ആഗ്രഹിച്ച വാക്കുകൾ പറയാൻ കഴിയട്ടെ. നേടണമെന്ന് ആഗ്രഹിച്ച നേട്ടങ്ങൾ സ്വന്തമാക്കാൻ കഴിയട്ടെ.`,
+`ഒരിക്കൽ തിരിഞ്ഞുനോക്കുമ്പോൾ, "ഞാൻ ജീവിച്ച ഓരോ വർഷവും എനിക്ക് എന്തെങ്കിലും മനോഹരമായത് സമ്മാനിച്ചിട്ടുണ്ട്" എന്ന് അഭിമാനത്തോടെ പറയാൻ കഴിയുന്നൊരു ജീവിതമായിരിക്കട്ടെ നിന്റേത്.`,
+`വർഷങ്ങൾ കടന്നുപോകും. മുഖത്ത് കാലത്തിന്റെ അടയാളങ്ങൾ തെളിയും. ഇന്നത്തെ പല ഓർമ്മകളും നാളെയുടെ കഥകളായി മാറും. എങ്കിലും നിന്റെ ഉള്ളിലെ ആ കൊച്ചുസന്തോഷം ഒരിക്കലും പ്രായമാകാതിരിക്കട്ടെ.`,
+`നീ എന്നും ചിരിക്കട്ടെ. ആ ചിരിയിൽ നിന്റെ സ്വപ്നങ്ങളുടെ പ്രകാശമുണ്ടാകട്ടെ. നീ എന്നും വളരട്ടെ. ആ വളർച്ചയിൽ നിന്റെ അധ്വാനത്തിന്റെ അഭിമാനമുണ്ടാകട്ടെ. നീ എന്നും സ്നേഹിക്കപ്പെടട്ടെ. ആ സ്നേഹത്തിൽ ആത്മാർത്ഥതയും വിശ്വാസവും ഉണ്ടാകട്ടെ.`,
+`അവസാനമായി, ഈ നാല് പേജുകൾക്കുള്ളിൽ ഒതുക്കാൻ കഴിയാത്ത ഒരുപാട് നല്ല ആശംസകൾ നിനക്കായി ഹൃദയത്തിൽ സൂക്ഷിക്കുന്നു.`,
+`ഇന്ന് നിന്റെ ദിവസമാണ്. നിനക്കായി പൂക്കൾ വിരിയട്ടെ. നിനക്കായി ആകാശം കൂടുതൽ നീലിമയുള്ളതാകട്ടെ. നിനക്കായി കാറ്റ് മനോഹരമായ പാട്ടുകൾ പാടട്ടെ. നിന്റെ വഴികളിൽ പ്രതീക്ഷയുടെ വെളിച്ചം എന്നും തെളിഞ്ഞുനിൽക്കട്ടെ.`,
+`**നവംബർ 25 എന്ന തീയതി ഓരോ വർഷവും തിരിച്ചുവരും. പക്ഷേ, ഈ വർഷത്തെ ഈ ദിവസം നിന്റെ ജീവിതത്തിൽ ഒരിക്കലും മറക്കാനാവാത്തൊരു മനോഹരമായ ഓർമ്മയായി മാറട്ടെ.`,
+`ജന്മദിനാശംസകൾ...`,
+`നിന്റെ ജീവിതത്തിലെ ഓരോ പുതിയ അധ്യായവും കഴിഞ്ഞ അധ്യായത്തേക്കാൾ മനോഹരമായിരിക്കട്ടെ.`,
+`നിന്റെ സ്വപ്നങ്ങൾ പൂവണിയട്ടെ. നിന്റെ ആഗ്രഹങ്ങൾ സഫലമാകട്ടെ. നിന്റെ ഹൃദയം സന്തോഷംകൊണ്ട് നിറയട്ടെ.`,
+`**ഈ ലോകത്തിന്റെ ഏതോ ഒരു കോണിൽ, നവംബർ 25 എന്ന തീയതിയെ ഇത്രമേൽ മനോഹരമായി കാണാൻ ഒരു കാരണമുണ്ട് — അത് നിന്റെ ജന്മദിനമാണ്.`,
+`എന്നും സന്തോഷത്തോടെ ഇരിക്കുക. ഒരുപാട് ഉയരങ്ങളിലേക്ക് എത്തുക. ജീവിതം നിനക്കായി കരുതിവെച്ചിരിക്കുന്ന എല്ലാ മനോഹരമായ നിമിഷങ്ങളും ആസ്വദിക്കുക.`,
+`**Once again, Happy Birthday! ❤️`
+]}
+];
+
+/* ======= helpers ======= */
+const $ = id => document.getElementById(id);
+const seg = window.Intl && Intl.Segmenter ? new Intl.Segmenter('ml',{granularity:'grapheme'}) : null;
+const clusters = s => seg ? Array.from(seg.segment(s),x=>x.segment) : Array.from(s);
+
+/* ======= lock ======= */
+const dob = $('dob');
+dob.addEventListener('input',()=>{
+  let d = dob.value.replace(/\D/g,'').slice(0,8), o = d.slice(0,2);
+  if(d.length>2) o += '-'+d.slice(2,4);
+  if(d.length>4) o += '-'+d.slice(4);
+  dob.value = o; $('err').textContent='';
+});
+dob.addEventListener('keydown',e=>{ if(e.key==='Enter') tryUnlock(); });
+$('unlock').onclick = tryUnlock;
+function tryUnlock(){
+  if(VALID_DOB.includes(dob.value.trim())){
+    $('lock').classList.remove('on'); $('book').classList.add('on'); burst(60); show(0);
+  } else {
+    $('err').textContent = 'തീയതി ശരിയല്ല, ഒന്നുകൂടി നോക്കൂ 🙈 (DD-MM-YYYY)';
+    const c=$('card'); c.classList.remove('shake'); void c.offsetWidth; c.classList.add('shake');
+  }
+}
+
+/* ======= pages ======= */
+let cur = 0, timers = [];
+const dots = $('dots');
+PAGES.forEach(()=>dots.appendChild(document.createElement('i')));
+
+function wordsToSpans(str, startIdx, step){
+  const frag = document.createDocumentFragment(); let i = startIdx;
+  str.split(' ').forEach((word,wi,arr)=>{
+    const w = document.createElement('span'); w.className='w';
+    clusters(word).forEach(ch=>{
+      const l = document.createElement('span'); l.className='l'; l.textContent=ch;
+      l.style.animationDelay = (i++*step)+'ms'; w.appendChild(l);
+    });
+    frag.appendChild(w); if(wi<arr.length-1) frag.appendChild(document.createTextNode(' '));
+  });
+  return {frag, next:i};
+}
+
+function show(n){
+  timers.forEach(clearTimeout); timers=[];
+  cur = n; const P = PAGES[n], box = $('text'), sc = $('scroll');
+  sc.classList.remove('done'); sc.scrollTop = 0; box.innerHTML='';
+  dots.querySelectorAll('i').forEach((d,i)=>d.classList.toggle('on',i===n));
+  $('prev').disabled = n===0; $('next').disabled = n===PAGES.length-1;
+
+  const total = clusters(P.title).length + P.paras.reduce((a,p)=>a+clusters(p.replace(/^\*\*/,'')).length,0);
+  const step = Math.max(10, Math.min(38, 26000/total));
+  let idx = 0;
+
+  const h = document.createElement('h2'); const r = wordsToSpans(P.title, idx, step);
+  h.appendChild(r.frag); idx = r.next; box.appendChild(h);
+
+  P.paras.forEach((t,k)=>{
+    const bold = t.startsWith('**'); if(bold) t = t.slice(2);
+    const p = document.createElement('p'); p.className = (bold?'b ':'')+(k>0?'gap':'');
+    idx += 6;                                   /* small pause between paragraphs */
+    const x = wordsToSpans(t, idx, step); p.appendChild(x.frag); idx = x.next; box.appendChild(p);
+  });
+
+  const endMs = idx*step + 1400;
+  /* follow the writing: keep the newest lines in view */
+  const follow = setInterval(()=>{
+    const ls = box.querySelectorAll('.l'); const k = Math.min(ls.length-1, Math.floor((performance.now()-t0)/step));
+    if(k>=0 && !sc.classList.contains('done') && !userScrolled){
+      const y = ls[k].offsetTop - sc.clientHeight*0.6; if(y>sc.scrollTop) sc.scrollTop = y;
+    }
+  },200);
+  const t0 = performance.now(); userScrolled=false;
+  timers.push(setTimeout(()=>clearInterval(follow), endMs));
+  timers.push(follow);
+
+  if(P.final){
+    const hb = document.createElement('div'); hb.className='bday';
+    const hr = wordsToSpans('Happy Birthday! 🎂', idx+10, step*1.6); hb.appendChild(hr.frag); box.appendChild(hb);
+    const ph = document.createElement('div'); ph.className='photo';
+    ph.innerHTML = '<div class="frame"><img alt="Birthday girl" src="'+PHOTO+'"></div>';
+    ph.querySelector('img').onerror = function(){ this.outerHTML='<div class="ph-missing">ഫോട്ടോ ഇവിടെ വരും — '+PHOTO+' എന്ന പേരിൽ ഫോട്ടോ ചേർക്കൂ</div>'; };
+    box.appendChild(ph);
+    const showAt = (idx+10)*step + 1500;
+    timers.push(setTimeout(()=>{ ph.classList.add('show'); burst(160); },showAt));
+    timers.push(setTimeout(()=>{ if(cur===n) burst(100); },showAt+3500));
+  }
+}
+let userScrolled=false;
+$('scroll').addEventListener('wheel',()=>userScrolled=true,{passive:true});
+$('scroll').addEventListener('touchmove',()=>userScrolled=true,{passive:true});
+
+function go(d){
+  const n = cur+d; if(n<0||n>=PAGES.length) return;
+  const sc=$('scroll'); sc.classList.add('fadeout');
+  setTimeout(()=>{ show(n); sc.classList.remove('fadeout'); },350);
+}
+$('prev').onclick=()=>go(-1); $('next').onclick=()=>go(1);
+$('skip').onclick=()=>{ $('scroll').classList.add('done'); const ph=document.querySelector('.photo'); if(ph) ph.classList.add('show'); };
+document.addEventListener('keydown',e=>{
+  if(!$('book').classList.contains('on')) return;
+  if(e.key==='ArrowRight') go(1); if(e.key==='ArrowLeft') go(-1);
+});
+
+/* ======= embers + confetti ======= */
+const cv = $('fx'), cx = cv.getContext('2d'); let W,H, parts=[], conf=[];
+function size(){ W=cv.width=innerWidth; H=cv.height=innerHeight; } size(); addEventListener('resize',size);
+function ember(){ return {x:Math.random()*W,y:H+10,r:Math.random()*2.4+.6,v:Math.random()*.9+.4,s:Math.random()*Math.PI*2,a:Math.random()*.6+.3}; }
+for(let i=0;i<55;i++){ const e=ember(); e.y=Math.random()*H; parts.push(e); }
+function burst(n){
+  const cols=['#ff4d00','#ffb300','#ffe27a','#ff6fa5','#ffffff','#8fd3ff'];
+  for(let i=0;i<n;i++) conf.push({x:Math.random()*W,y:-20-Math.random()*H*.4,w:Math.random()*8+4,h:Math.random()*5+3,vy:Math.random()*2.5+1.5,vx:Math.random()*2-1,rot:Math.random()*6,vr:Math.random()*.2-.1,c:cols[i%cols.length]});
+}
+(function loop(){
+  cx.clearRect(0,0,W,H);
+  parts.forEach((p,i)=>{
+    p.y-=p.v; p.s+=.03; p.x+=Math.sin(p.s)*.5;
+    if(p.y<-10) parts[i]=ember();
+    cx.beginPath(); cx.fillStyle='rgba(255,'+(120+p.r*30|0)+',30,'+p.a+')'; cx.shadowColor='#ff7a1a'; cx.shadowBlur=10;
+    cx.arc(p.x,p.y,p.r,0,6.3); cx.fill();
+  });
+  cx.shadowBlur=0;
+  conf = conf.filter(c=>c.y<H+20);
+  conf.forEach(c=>{ c.y+=c.vy; c.x+=c.vx+Math.sin(c.y/30); c.rot+=c.vr;
+    cx.save(); cx.translate(c.x,c.y); cx.rotate(c.rot); cx.fillStyle=c.c; cx.fillRect(-c.w/2,-c.h/2,c.w,c.h); cx.restore(); });
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
