@@ -67,6 +67,15 @@ body{background:radial-gradient(ellipse at 50% 120%,#5a1d0c 0%,#2a0f22 45%,var(-
 .dots i.on{background:var(--flame);box-shadow:0 0 12px var(--ember)}
 .fadeout{opacity:0;transition:opacity .35s}
 .scroll{transition:opacity .35s}
+#book{height:100vh;height:100dvh;bottom:auto;padding-bottom:max(12px,env(safe-area-inset-bottom))}
+.nav button{white-space:nowrap;flex-shrink:0}
+@media (max-width:520px){
+  .dots{display:none}
+  .nav{gap:6px}
+  .nav button{height:44px;padding:0 12px;font-size:14px}
+  .nav #prev,.nav #next{flex:1}
+  .nav .skip{padding:0 10px}
+}
 @media (prefers-reduced-motion:reduce){.l{animation:none;opacity:1}.photo{transition:none}}
 </style>
 </head>
